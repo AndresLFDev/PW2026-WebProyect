@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import './App.css'
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Meetings from './pages/Meetings'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Profile from './pages/Profile'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="bg-blue-500 text-white text-center p-10">
-      <h1 className="text-4xl font-bold">Hola mundo</h1>
-      <p className="mt-4">Tailwind está funcionando</p>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path = "/" element = {<Home />} />
+        <Route path = "/meetings" element = {<Meetings />} />
+        <Route path = "/login" element = {<Login />} />
+        <Route path = "/register" element = {<Register />} />
+        <Route path = "/profile" element = {<Profile />} />
+      </Routes>
+    </>
   )
 }
 
