@@ -1,4 +1,7 @@
+import { useAuth } from "../context/AuthContext";
+
 function Register() {
+  const {login, logout} = useAuth();
   return (
     <>
       <div className="flex flex-col items-center justify-center h-screen">
@@ -9,7 +12,7 @@ function Register() {
             placeholder="Name" />
           <input className="p-2 rounded border border-gray-300" type="email" placeholder="Email" />
           <input className="p-2 rounded border border-gray-300" type="password" placeholder="Password" />
-          <button className="p-2 rounded bg-[#A9945F] text-white hover:bg-[#284636] transition-colors" type="submit">Register</button>
+          <button onClick={() => login({name: "John"})} className="p-2 rounded bg-[#A9945F] text-white hover:bg-[#284636] transition-colors" type="button">Register</button>
         </form>
       </div>
     </>

@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 function Navbar() {
+  const { user } = useAuth()
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 flex py-2 px-4 items-center gap-10 bg-[#284636]">
       <Link to="/">
@@ -14,7 +17,11 @@ function Navbar() {
           <Link to="/meetings" className="hover:text-[#A9945F] transition-all duration-300">Reuniones</Link>
           <Link to="/groups" className="hover:text-[#A9945F] transition-all duration-300">Grupos</Link>
           <Link to="/places" className="hover:text-[#A9945F] transition-all duration-300">Lugares</Link>
-          <Link to="/register" className="hover:text-[#A9945F] transition-all duration-300">Registrarse</Link>
+          {user ? (
+            <Link to="/profile" className="hover:text-[#A9945F] transition-all duration-300">Perfil</Link>
+          ) : (
+            <Link to="/register" className="hover:text-[#A9945F] transition-all duration-300">Registrarse</Link>
+          )}
         </ul>
       </div>
     </nav>
