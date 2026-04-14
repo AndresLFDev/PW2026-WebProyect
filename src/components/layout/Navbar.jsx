@@ -2,19 +2,19 @@ import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
-    <nav class="flex py-2 px-4  items-center gap-10 bg-[#284636]">
+    <nav className="fixed top-0 left-0 w-full z-50 flex py-2 px-4 items-center gap-10 bg-[#284636]">
       <Link to="/">
-        <div id="logotipo" class="flex flex-row items-center gap-2.5 text-[#A9945F] font-bold ">
+        <div id="logotipo" className="flex flex-row items-center gap-2.5 text-[#A9945F] font-bold">
           <img src="./src/assets/LogoMonoColor.png" alt="Logo de la Pagina" width="50px" height="50px" />
           <span>BIOsalud</span>
         </div>
       </Link>
-      <div class="w-full flex justify-end text-amber-50">
-        <ul class="flex flex-row gap-3">
-          <Link to="/meetings" class="hover:text-[#A9945F] transition-all duration-300">Reuniones</Link>
-          <Link to="/groups" class="hover:text-[#A9945F] transition-all duration-300">Grupos</Link>
-          <Link to="/places" class="hover:text-[#A9945F] transition-all duration-300">Lugares</Link>
-          <Link to="/register" class="hover:text-[#A9945F] transition-all duration-300">Registrarse</Link>
+      <div className="w-full flex justify-end text-amber-50">
+        <ul className="flex flex-row gap-3">
+          <Link to="/meetings" className="hover:text-[#A9945F] transition-all duration-300">Reuniones</Link>
+          <Link to="/groups" className="hover:text-[#A9945F] transition-all duration-300">Grupos</Link>
+          <Link to="/places" className="hover:text-[#A9945F] transition-all duration-300">Lugares</Link>
+          <Link to="/register" className="hover:text-[#A9945F] transition-all duration-300">Registrarse</Link>
         </ul>
       </div>
     </nav>

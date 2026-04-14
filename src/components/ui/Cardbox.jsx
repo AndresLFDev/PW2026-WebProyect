@@ -36,7 +36,7 @@ function Cardbox({ items, title }) {
                 <span className="mx-6 text-gray-500 font-serif text-[1.25rem] tracking-wide">{title}</span>
                 <div className="grow h-px bg-gray-400"></div>
             </div>
-            <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-5">
                 {items.map((item) => (
                     <Card
                         key={item.id}
