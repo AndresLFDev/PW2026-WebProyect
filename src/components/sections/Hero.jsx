@@ -1,10 +1,10 @@
-import heroImg from '../assets/hero-bg.png'
+import heroImg from '../../assets/hero-bg.png'
 
 function Hero() {
   return (
     <section id="hero" class="relative min-h-screen flex items-center px-10 text-amber-50">
       <div class="absolute inset-0 -z-10">
-        <img src="src/assets/hero-bg.png" class="w-full h-full object-cover" />
+        <img src={heroImg} class="w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/60"></div> {/* eslint-disable-line */}
       </div>
       <div class="max-w-2xl flex flex-col gap-5">
