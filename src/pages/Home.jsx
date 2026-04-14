@@ -1,7 +1,7 @@
-import Hero from '../components/Hero'
-import Description from '../components/Description'
-import Carousel from '../components/Cardbox'
-import Footer from '../components/Footer'
+import Hero from '../components/sections/Hero'
+import Description from '../components/sections/Description'
+import Carousel from '../components/ui/Cardbox'
+import Footer from '../components/layout/Footer'
 
 const meetings = [
   {

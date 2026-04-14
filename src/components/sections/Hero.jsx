@@ -5,7 +5,7 @@ function Hero() {
     <section id="hero" class="relative min-h-screen flex items-center px-10 text-amber-50">
       <div class="absolute inset-0 -z-10">
         <img src="src/assets/hero-bg.png" class="w-full h-full object-cover" />
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/60"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/15 to-black/60"></div> {/* eslint-disable-line */}
       </div>
       <div class="max-w-2xl flex flex-col gap-5">
         <h1 class="text-5xl md:text-6xl font-bold leading-tight drop-shadow-2xl">

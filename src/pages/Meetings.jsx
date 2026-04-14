@@ -1,4 +1,4 @@
-import Cardbox from '../components/Cardbox'
+import Cardbox from '../components/ui/Cardbox'
 const meetings = [
   {
     id: 1,
