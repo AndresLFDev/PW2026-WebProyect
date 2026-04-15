@@ -1,7 +1,9 @@
 import Hero from '../components/sections/Hero'
 import Description from '../components/sections/Description'
-import Carousel from '../components/ui/Cardbox'
+import Cardbox from '../components/ui/Cardbox'
 import Footer from '../components/layout/Footer'
+import placeholderMeetings from '../assets/placeholderPlaces.jpg'
+import placeholderPlaces from '../assets/placeholderPlaces.jpg'
 
 const meetings = [
   {
@@ -9,42 +11,42 @@ const meetings = [
     title: "Reunion 1",
     date: "2022-01-01",
     location: "Lugar 1",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   },
   {
     id: 2,
     title: "Reunion 2",
     date: "2022-01-02",
     location: "Lugar 2",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   },
   {
     id: 3,
     title: "Reunion 3",
     date: "2022-01-03",
     location: "Lugar 3",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   },
   {
     id: 4,
     title: "Reunion 4",
     date: "2022-01-04",
     location: "Lugar 4",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   },
   {
     id: 5,
     title: "Reunion 5",
     date: "2022-01-05",
     location: "Lugar 5",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   },
   {
     id: 6,
     title: "Reunion 6",
     date: "2022-01-06",
     location: "Lugar 6",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderMeetings
   }
 ]
 const places = [
@@ -52,31 +54,31 @@ const places = [
     id: 1,
     title: "Lugar 1",
     location: "Lugar 1",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderPlaces
   },
   {
     id: 2,
     title: "Lugar 2",
     location: "Lugar 2",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderPlaces
   },
   {
     id: 3,
     title: "Lugar 3",
     location: "Lugar 3",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderPlaces
   },
   {
     id: 4,
     title: "Lugar 4",
     location: "Lugar 4",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderPlaces
   },
   {
     id: 5,
     title: "Lugar 5",
     location: "Lugar 5",
-    image: "https://images.unsplash.com/photo-1506744038136-49561d31d55b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+    image: placeholderPlaces
   }
 ]
 
@@ -85,11 +87,11 @@ function Home() {
     <div>
       <Hero />
       <Description />
-      <Carousel
+      <Cardbox
         items={meetings}
         title={"Proximas Reuniones"}
       />
-      <Carousel
+      <Cardbox
         items={places}
         title={"Lugares"}
       />

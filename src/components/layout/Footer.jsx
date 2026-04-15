@@ -4,7 +4,7 @@ function Footer() {
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-20">
                 <div class="flex flex-col gap-4">
                     <div class="flex items-center gap-2.5 text-[#A9945F] font-bold text-xl">
-                        <img src="./src/img/LogoMonoColor.png" alt="Logo" width="40" height="40">
+                        <img src="./src/assets/LogoMonoColor.png" alt="Logo" width="40" height="40">
                         </img>
                         <span>BIOsalud</span>
                     </div>
