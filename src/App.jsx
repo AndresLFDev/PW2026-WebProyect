@@ -1,16 +1,20 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
 import PrivateRoute from './components/layout/Privateroute'
 import Home from './pages/Home'
 import Meetings from './pages/Meetings'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Profile from './pages/Profile'
- 
+
 function App() {
+  const location = useLocation()
+  const isNavbarVisible = !['/login', '/register'].includes(location.pathname)
+
   return (
     <>
-      <Navbar />
+      {isNavbarVisible && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -25,8 +29,9 @@ function App() {
           }
         />
       </Routes>
+      <Footer />
     </>
   )
 }
- 
+
 export default App

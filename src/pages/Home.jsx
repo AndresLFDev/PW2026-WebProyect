@@ -1,7 +1,6 @@
 import Hero from '../components/sections/Hero'
 import Description from '../components/sections/Description'
 import Cardbox from '../components/ui/Cardbox'
-import Footer from '../components/layout/Footer'
 import placeholderMeetings from '../assets/placeholderPlaces.jpg'
 import placeholderPlaces from '../assets/placeholderPlaces.jpg'
 
@@ -95,7 +94,6 @@ function Home() {
         items={places}
         title={"Lugares"}
       />
-      <Footer />
     </div>
   )
 }
