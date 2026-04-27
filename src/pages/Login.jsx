@@ -48,7 +48,7 @@ function Login() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#284636] focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
               placeholder="tu@email.com"
               required
             />
@@ -63,7 +63,7 @@ function Login() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#284636] focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
               placeholder="••••••••"
               required
             />
@@ -72,7 +72,7 @@ function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#284636] text-white py-2 px-4 rounded-md hover:bg-[#A9945F] transition duration-200 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full bg-forest-700 text-white py-2 px-4 rounded-md hover:bg-[#A9945F] transition duration-200 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? 'Ingresando...' : 'Iniciar Sesión'}
           </button>
@@ -81,7 +81,7 @@ function Login() {
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600">
             ¿No tienes cuenta?{' '}
-            <Link to="/register" className="text-[#284636] hover:underline font-medium">
+            <Link to="/register" className="text-forest-700 hover:underline font-medium">
               Regístrate
             </Link>
           </p>

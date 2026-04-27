@@ -23,12 +23,12 @@ function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-40 transition-all duration-500
+      className={`fixed top-0 w-full z-40 transition-all duration-500
       ${scrolled ? 'bg-cream-50/85 backdrop-blur-md border-b border-forest-700/10' : 'bg-transparent'}`}>
       <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-4 flex items-center gap-8">
         <Link to="/" className="flex items-center gap-3">
-          <div className='w-11 h-11 rounded-full bg-forest-800 flex items-center justify-center'>
-            <img src={logoImg} alt="Logo" className="h-10 w-auto" />
+          <div className='w-8 h-8 rounded-full bg-forest-700 flex items-center justify-center'>
+            <img src={logoImg} alt="Logo" className="h-6 w-auto" />
           </div>
           <span className="font-display text-[1.35rem] tracking-tight text-forest-800">
             BIO<span className="text-gold-600">salud</span>
@@ -53,7 +53,7 @@ function Navbar() {
         <div className="ml-auto flex items-center gap-2">
           {user ? (
             <Link to="/profile">
-              <span className="text-sm font-semibold px-4 py-2.5 rounded-b-full bg-forest-800 text-cream-100 hover:bg-forest-700 transition-colors">Perfil</span>
+              <span className="text-sm font-semibold px-4 py-2.5 rounded-full bg-forest-800 text-cream-100 hover:bg-forest-700 transition-colors">Perfil</span>
             </Link>
           ) : (
             <>
@@ -67,9 +67,9 @@ function Navbar() {
           )}
           <button
             onClick={() => setOpen(true)}
-            className="md:hidden w-10 h-10 rounded-full flex items-center justify-center text-forest-800"
+            className="md:hidden w-8 h-8 rounded-full flex items-center justify-center text-forest-800"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-icon lucide-menu"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
             {/*<span>☰</span>*/}
           </button>
         </div>
@@ -80,7 +80,7 @@ function Navbar() {
             <div className="flex items-center justify-between">
               <span className='font-display text-xl text-forest-800'>Menú</span>
               <button onClick={() => setOpen(false)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
               </button>
             </div>
             <nav className='flex flex-col gap-1 mt-8'>

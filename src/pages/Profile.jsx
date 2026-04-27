@@ -33,7 +33,7 @@ const user1 = {
 const ActionButton = ({ icon, label, onClick }) => (
   <button
     onClick={onClick}
-    className="flex items-center gap-2.5 w-full bg-white border border-[#284636] text-[#284636] py-2 px-4 rounded-full text-sm font-medium hover:bg-[#284636] hover:text-white transition-colors duration-200 shadow-sm">
+    className="flex items-center gap-2.5 w-full bg-white border border-forest-700 text-forest-700 py-2 px-4 rounded-full text-sm font-medium hover:bg-forest-600 hover:text-white transition-colors duration-200 shadow-sm">
     {icon}
     <span>{label}</span>
   </button>
@@ -50,16 +50,11 @@ function Profile() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-[54px]">
+    <div className="min-h-screen bg-gray-50 pt-18">
       <TopBannerProfile user={user1} />
 
-      {/* Main content */}
       <div className="max-w-[900px] mx-auto px-4 md:px-10 py-6 flex flex-col md:flex-row md:items-stretch gap-6 min-h-[calc(100vh-54px)]">
-
-        {/* Left sidebar */}
         <aside className="w-full md:w-52 shrink-0 flex flex-col gap-4 h-full">
-
-          {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col gap-2.5">
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Acciones</h3>
             <ActionButton
@@ -88,12 +83,10 @@ function Profile() {
               }
             />
           </div>
-
-          {/* Companions */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Compañeros</h3>
-              <span className="text-xs text-[#284636] font-semibold">{user1.friends}</span>
+              <span className="text-xs text-forest-700 font-semibold">{user1.friends}</span>
             </div>
             <div className="grid grid-cols-3 gap-3">
               {companions.map((c) => (
@@ -102,7 +95,7 @@ function Profile() {
                     <img
                       src={c.img}
                       alt={c.name}
-                      className="w-14 h-14 object-cover rounded-full border-2 border-gray-100 group-hover:border-[#284636] transition-colors duration-200"
+                      className="w-14 h-14 object-cover rounded-full border-2 border-gray-100 group-hover:border-forest-700 transition-colors duration-200"
                     />
                     <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
                   </div>
@@ -110,12 +103,10 @@ function Profile() {
                 </div>
               ))}
             </div>
-            <button className="mt-3 w-full text-center text-xs text-[#284636] hover:underline font-medium">
+            <button className="mt-3 w-full text-center text-xs text-forest-700 hover:underline font-medium">
               Ver todos
             </button>
           </div>
-
-          {/* Logout */}
           <button
             onClick={() => { logout(); window.location.href = "/login"; }}
             className="flex items-center justify-center gap-2 w-full text-sm text-gray-400 hover:text-red-500 transition-colors py-2">
@@ -126,10 +117,7 @@ function Profile() {
           </button>
         </aside>
 
-        {/* Main area */}
         <main className="flex-1 min-w-0 flex flex-col gap-4 h-full">
-
-          {/* Tabs */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col flex-1">
             <div className="flex border-b border-gray-100">
               {tabs.map((tab) => (
@@ -138,22 +126,20 @@ function Profile() {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-3 text-sm font-semibold transition-colors duration-200
                     ${activeTab === tab.id
-                      ? "text-[#284636] border-b-2 border-[#284636] bg-[#f0f7f3]"
+                      ? "text-forest-700 border-b-2 border-forest-700 bg-[#f0f7f3]"
                       : "text-gray-400 hover:text-gray-600"
                     }`}>
                   {tab.label}
                 </button>
               ))}
             </div>
-
-            {/* Tab Content */}
             <div className="p-4 flex-1">
               {activeTab === "lugares" && (
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {places.map((place) => (
                     <div key={place.id} className="group relative rounded-lg overflow-hidden shadow-sm border border-gray-100 cursor-pointer">
                       <img src={place.image} alt={place.title} className="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                       <div className="p-2">
                         <p className="text-xs font-semibold text-gray-700 truncate">{place.title}</p>
                         <p className="text-[10px] text-gray-400 flex items-center gap-1">
@@ -165,8 +151,7 @@ function Profile() {
                       </div>
                     </div>
                   ))}
-                  {/* Add place card */}
-                  <button className="rounded-lg border-2 border-dashed border-gray-200 h-full min-h-[120px] flex flex-col items-center justify-center gap-2 text-gray-300 hover:border-[#284636] hover:text-[#284636] transition-colors duration-200">
+                  <button className="rounded-lg border-2 border-dashed border-gray-200 h-full min-h-[120px] flex flex-col items-center justify-center gap-2 text-gray-300 hover:border-forest-700 hover:text-forest-700 transition-colors duration-200">
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
@@ -181,7 +166,7 @@ function Profile() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
                   <p className="text-sm">No tienes reuniones aún</p>
-                  <button className="mt-3 text-xs text-[#284636] hover:underline font-medium">Crear una reunión</button>
+                  <button className="mt-3 text-xs text-forest-700 hover:underline font-medium">Crear una reunión</button>
                 </div>
               )}
 
@@ -191,7 +176,7 @@ function Profile() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <p className="text-sm">No perteneces a ningún grupo</p>
-                  <button className="mt-3 text-xs text-[#284636] hover:underline font-medium">Crear un grupo</button>
+                  <button className="mt-3 text-xs text-forest-700 hover:underline font-medium">Crear un grupo</button>
                 </div>
               )}
             </div>
