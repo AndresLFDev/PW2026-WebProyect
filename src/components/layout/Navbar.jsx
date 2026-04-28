@@ -13,14 +13,29 @@ function Navbar() {
         </div>
       </Link>
       <div className="w-full flex justify-end text-amber-50">
-        <ul className="flex flex-row gap-3">
+        <ul className="flex flex-row gap-3 items-center">
           <Link to="/meetings" className="hover:text-[#A9945F] transition-all duration-300">Reuniones</Link>
-          <Link to="/groups" className="hover:text-[#A9945F] transition-all duration-300">Grupos</Link>
-          <Link to="/places" className="hover:text-[#A9945F] transition-all duration-300">Lugares</Link>
+          <Link to="/groups"   className="hover:text-[#A9945F] transition-all duration-300">Grupos</Link>
+          <Link to="/places"   className="hover:text-[#A9945F] transition-all duration-300">Lugares</Link>
           {user ? (
-            <Link to="/profile" className="hover:text-[#A9945F] transition-all duration-300">Perfil</Link>
+            <Link to="/profile" className="hover:text-[#A9945F] transition-all duration-300">
+              Perfil
+            </Link>
           ) : (
-            <Link to="/register" className="hover:text-[#A9945F] transition-all duration-300">Registrarse</Link>
+            <>
+              <Link
+                to="/login"
+                className="hover:text-[#A9945F] transition-all duration-300"
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                to="/register"
+                className="px-3 py-1 rounded-full bg-[#A9945F] text-[#1a2e23] font-semibold text-sm hover:bg-amber-200 transition-all duration-300"
+              >
+                Registrarse
+              </Link>
+            </>
           )}
         </ul>
       </div>
