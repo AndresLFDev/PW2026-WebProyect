@@ -1,8 +1,8 @@
-import Hero from '../components/sections/Hero'
-import Description from '../components/sections/Description'
-import Cardbox from '../components/ui/Cardbox'
-import placeholderMeetings from '../assets/placeholderPlaces.jpg'
-import placeholderPlaces from '../assets/placeholderPlaces.jpg'
+import Hero from './Hero'
+import Description from './Description'
+import Cardbox from '../../components/ui/Cardbox'
+import placeholderMeetings from '../../assets/placeholderPlaces.jpg'
+import placeholderPlaces from '../../assets/placeholderPlaces.jpg'
 
 const meetings = [
   {

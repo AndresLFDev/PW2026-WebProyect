@@ -19,7 +19,7 @@ function Card({ item }) {
                     </div>
                 )}
                 <div className="flex flex-row items-center justify-end">
-                    <a href="#" className="text-[#A9945F] hover:text-[#1e382a] hover:scale-105 transition-all duration-300">
+                    <a href="#" className="text-[#A9945F] hover:text-forest-800 hover:scale-105 transition-all duration-300">
                         ver más
                     </a>
                 </div>

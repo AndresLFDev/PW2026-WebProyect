@@ -14,8 +14,8 @@ function Hero() {
         <p className="text-lg md:text-2xl text-amber-50/90 drop-shadow-lg">
           Conecta con la naturaleza y contigo mismo
         </p>
-        <button className="bg-[#A9945F] text-forest-800 w-fit px-6 py-3 mt-4 rounded-full font-semibold
-                        hover:bg-forest-800 hover:text-[#A9945F] hover:scale-105
+        <button className="bg-gold-600 text-forest-800 w-fit px-6 py-3 mt-4 rounded-full font-semibold
+                        hover:bg-forest-800 hover:text-gold-600 hover:scale-105
                         transition-all duration-300 shadow-lg">
           Conócenos
         </button>
