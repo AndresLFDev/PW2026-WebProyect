@@ -11,7 +11,7 @@ import {
 const AuthContext = createContext()
 
 // Traductor de códigos de error de Firebase al español
-export function translateFirebaseError(code) {
+export const translateFirebaseError = (code) => {
   const errors = {
     'auth/email-already-in-use': 'Este correo ya está registrado.',
     'auth/invalid-email': 'El correo electrónico no es válido.',
