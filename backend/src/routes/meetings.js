@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { getConnection } from '../config/db.js';
-import sql from 'mssql';
 
 const router = Router();
 
@@ -10,15 +9,7 @@ router.post('/', async (req, res) => {
         const { title, description, date_time, location, coordinates, max_capacity, created_by } = req.body;
 
         const pool = await getConnection();
-        await pool.request()
-            .input('title', sql.VarChar, title)
-            .input('description', sql.VarChar, description)
-            .input('date_time', sql.DateTime, date_time)
-            .input('location', sql.VarChar, location)
-            .input('coordinates', sql.VarChar, coordinates)
-            .input('max_capacity', sql.Int, max_capacity)
-            .input('created_by', sql.VarChar, created_by)
-            .query('INSERT INTO meetings (title, description, date_time, location, coordinates, max_capacity, created_by) VALUES (@title, @description, @date_time, @location, @coordinates, @max_capacity, @created_by)');
+        await pool.query('INSERT INTO meetings (title, description, date_time, location, coordinates, max_capacity, created_by) VALUES ($1, $2, $3, $4, $5, $6, $7)', [title, description, date_time, location, coordinates, max_capacity, created_by]);
         res.json({ status: 'success', message: 'Reunión creada correctamente' });
     } catch (error) {
         console.error('Error en POST meetings:', error.message)  // ← agrega esto
@@ -33,15 +24,8 @@ router.put('/:id', async (req, res) => {
         const { id } = req.params;
 
         const pool = await getConnection()
-        await pool.request()
-            .input('title', sql.VarChar, title)
-            .input('description', sql.VarChar, description)
-            .input('date_time', sql.DateTime, date_time)
-            .input('location', sql.VarChar, location)
-            .input('coordinates', sql.VarChar, coordinates)
-            .input('max_capacity', sql.Int, max_capacity)
-            .input('id', sql.Int, id)
-            .query('UPDATE meetings SET title = @title, description = @description, date_time = @date_time, location = @location, coordinates = @coordinates, max_capacity = @max_capacity WHERE id = @id');
+        await pool.query('UPDATE meetings SET title = $1, description = $2, date_time = $3, location = $4, coordinates = $5, max_capacity = $6 WHERE id = $7', [title, description, date_time, location, coordinates, max_capacity, id]);
+        
         res.json({ status: 'success', message: 'Reunión actualizada correctamente' });
     } catch (error) {
         res.status(500).json({ status: 'error', message: error.message });
@@ -53,9 +37,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const pool = await getConnection();
-        await pool.request()
-            .input('id', sql.Int, id)
-            .query('DELETE FROM meetings WHERE id = @id');
+        await pool.query('DELETE FROM meetings WHERE id = $1', [id]);
         res.json({ status: 'success', message: 'Reunión eliminada correctamente' });
     } catch (error) {
         res.status(500).json({ status: 'error', message: error.message });
@@ -65,8 +47,8 @@ router.delete('/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const pool = await getConnection();
-        const result = await pool.request().query('SELECT * FROM meetings');
-        res.json(result.recordset);
+        const result = await pool.query('SELECT * FROM meetings');
+        res.json(result.rows);
     } catch (error) {
         res.status(500).json({ status: 'error', message: error.message });
     }
