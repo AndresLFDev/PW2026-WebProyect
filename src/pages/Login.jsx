@@ -1,99 +1,94 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth, translateFirebaseError } from '../context/AuthContext'
 
 function Login() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({});
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const validate = () => {
-    const newErrors = {};
-    if (!formData.email.trim())
-      newErrors.email = "El email es obligatorio.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "El email no es válido.";
-    if (!formData.password)
-      newErrors.password = "La contraseña es obligatoria.";
-    return newErrors;
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+    try {
+      await login(email, password)
+      navigate('/')
+    } catch (err) {
+      setError(translateFirebaseError(err.code))
+    } finally {
+      setLoading(false)
     }
-    // Sin backend: simula login con el email ingresado
-    const nombreFromEmail = formData.email.split("@")[0];
-    login({
-      nombre: nombreFromEmail,
-      apellido: "",
-      email: formData.email.trim(),
-    });
-    navigate("/profile");
-  };
+  }
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] flex items-center justify-center pt-16 px-4">
-      <div className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-[#1a2e23] mb-1">Iniciar sesión</h1>
-        <p className="text-sm text-gray-400 mb-6">
-          ¿No tienes cuenta?{" "}
-          <Link to="/register" className="text-[#A9945F] hover:underline font-medium">
-            Regístrate
-          </Link>
-        </p>
+    <div className="flex justify-center items-center w-screen h-screen bg-gray-50">
+      <div className="bg-white p-8 rounded-lg shadow-md w-96">
+        <h2 className="text-4xl font-bold text-center mb-6 text-gray-800">
+          Iniciar Sesión
+        </h2>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-          {/* Email */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-gray-500 font-medium">Email</label>
+        {error && (
+          <p className="text-red-500 text-sm mb-4 bg-red-50 border border-red-200 rounded px-3 py-2">
+            {error}
+          </p>
+        )}
+
+        <form className="space-y-4" onSubmit={handleLogin}>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Correo Electrónico
+            </label>
             <input
-              name="email"
               type="email"
-              placeholder="juan@email.com"
-              value={formData.email}
-              onChange={handleChange}
-              className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                ${errors.email ? "border-red-400 bg-red-50" : "border-gray-200"}`}
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              placeholder="tu@email.com"
+              required
             />
-            {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
           </div>
 
-          {/* Contraseña */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-gray-500 font-medium">Contraseña</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Contraseña
+            </label>
             <input
-              name="password"
               type="password"
-              placeholder="Tu contraseña"
-              value={formData.password}
-              onChange={handleChange}
-              className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                ${errors.password ? "border-red-400 bg-red-50" : "border-gray-200"}`}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              placeholder="••••••••"
+              required
             />
-            {errors.password && <p className="text-xs text-red-500">{errors.password}</p>}
           </div>
 
           <button
             type="submit"
-            className="mt-2 py-2.5 rounded-lg bg-[#A9945F] text-white font-semibold text-sm hover:bg-[#284636] transition-colors duration-200"
+            disabled={loading}
+            className="w-full bg-forest-700 text-white py-2 px-4 rounded-md hover:bg-[#A9945F] transition duration-200 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Iniciar sesión
+            {loading ? 'Ingresando...' : 'Iniciar Sesión'}
           </button>
         </form>
+
+        <div className="mt-6 text-center">
+          <p className="text-sm text-gray-600">
+            ¿No tienes cuenta?{' '}
+            <Link to="/register" className="text-forest-700 hover:underline font-medium">
+              Regístrate
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

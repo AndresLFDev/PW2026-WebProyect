@@ -1,146 +1,135 @@
-import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth, translateFirebaseError } from '../context/AuthContext'
 
 function Register() {
-  const { login } = useAuth();
-  const navigate = useNavigate();
+  const { register } = useAuth()
+  const navigate = useNavigate()
 
-  const [formData, setFormData] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    password: "",
-  });
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const [errors, setErrors] = useState({});
+  const handleRegister = async (e) => {
+    e.preventDefault()
+    setError('')
 
-  const validate = () => {
-    const newErrors = {};
-
-    if (!formData.nombre.trim())
-      newErrors.nombre = "El nombre es obligatorio.";
-
-    if (!formData.apellido.trim())
-      newErrors.apellido = "El apellido es obligatorio.";
-
-    if (!formData.email.trim())
-      newErrors.email = "El email es obligatorio.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = "El email no es válido.";
-
-    if (!formData.password)
-      newErrors.password = "La contraseña es obligatoria.";
-    else if (formData.password.length < 8)
-      newErrors.password = "La contraseña debe tener al menos 8 caracteres.";
-    else if (!/[a-zA-Z]/.test(formData.password))
-      newErrors.password = "La contraseña debe contener al menos una letra.";
-
-    return newErrors;
-  };
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = validate();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+    if (password !== confirmPassword) {
+      return setError('Las contraseñas no coinciden.')
     }
-    login({
-      nombre: formData.nombre.trim(),
-      apellido: formData.apellido.trim(),
-      email: formData.email.trim(),
-    });
-    navigate("/profile");
-  };
+    if (password.length < 6) {
+      return setError('La contraseña debe tener al menos 6 caracteres.')
+    }
+
+    setLoading(true)
+    try {
+      await register(email, password, name)
+      navigate('/')
+    } catch (err) {
+      setError(translateFirebaseError(err.code))
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
-    <div className="min-h-screen bg-[#f5f0e8] flex items-center justify-center pt-16 px-4">
-      <div className="bg-white rounded-2xl shadow-sm p-8 w-full max-w-md">
-        <h1 className="text-2xl font-bold text-[#1a2e23] mb-1">Crear cuenta</h1>
-        <p className="text-sm text-gray-400 mb-6">
-          ¿Ya tienes cuenta?{" "}
-          <Link to="/login" className="text-[#A9945F] hover:underline font-medium">
-            Inicia sesión
-          </Link>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center mb-2 text-gray-800">
+          Crea tu cuenta
+        </h2>
+        <p className="text-center text-sm text-gray-500 mb-6">
+          Únete a BIOsalud hoy
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
-          {/* Nombre y Apellido */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="flex flex-col gap-1">
-              <label className="text-xs text-gray-500 font-medium">Nombre</label>
-              <input
-                name="nombre"
-                type="text"
-                placeholder="Juan"
-                value={formData.nombre}
-                onChange={handleChange}
-                className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                  ${errors.nombre ? "border-red-400 bg-red-50" : "border-gray-200"}`}
-              />
-              {errors.nombre && <p className="text-xs text-red-500">{errors.nombre}</p>}
-            </div>
-            <div className="flex flex-col gap-1">
-              <label className="text-xs text-gray-500 font-medium">Apellido</label>
-              <input
-                name="apellido"
-                type="text"
-                placeholder="Pérez"
-                value={formData.apellido}
-                onChange={handleChange}
-                className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                  ${errors.apellido ? "border-red-400 bg-red-50" : "border-gray-200"}`}
-              />
-              {errors.apellido && <p className="text-xs text-red-500">{errors.apellido}</p>}
-            </div>
+        {error && (
+          <p className="text-red-500 text-sm mb-4 bg-red-50 border border-red-200 rounded px-3 py-2">
+            {error}
+          </p>
+        )}
+
+        <form onSubmit={handleRegister} className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+              Nombre completo
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Tu nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              required
+            />
           </div>
 
-          {/* Email */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-gray-500 font-medium">Email</label>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              Correo Electrónico
+            </label>
             <input
-              name="email"
               type="email"
-              placeholder="juan@email.com"
-              value={formData.email}
-              onChange={handleChange}
-              className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                ${errors.email ? "border-red-400 bg-red-50" : "border-gray-200"}`}
+              id="email"
+              placeholder="tu@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              required
             />
-            {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
           </div>
 
-          {/* Contraseña */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs text-gray-500 font-medium">Contraseña</label>
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              Contraseña
+            </label>
             <input
-              name="password"
               type="password"
-              placeholder="Mínimo 8 caracteres con al menos una letra"
-              value={formData.password}
-              onChange={handleChange}
-              className={`border rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#A9945F] transition-colors
-                ${errors.password ? "border-red-400 bg-red-50" : "border-gray-200"}`}
+              id="password"
+              placeholder="Mínimo 6 caracteres"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              required
             />
-            {errors.password && <p className="text-xs text-red-500">{errors.password}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+              Confirmar contraseña
+            </label>
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Repite tu contraseña"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-forest-700 focus:border-transparent"
+              required
+            />
           </div>
 
           <button
             type="submit"
-            className="mt-2 py-2.5 rounded-lg bg-[#A9945F] text-white font-semibold text-sm hover:bg-[#284636] transition-colors duration-200"
+            disabled={loading}
+            className="bg-forest-700 text-white py-2 rounded-md hover:bg-[#A9945F] transition-colors font-medium disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Crear cuenta
+            {loading ? 'Creando cuenta...' : 'Registrarse'}
           </button>
         </form>
+
+        <p className="text-center text-sm mt-4 text-gray-500">
+          ¿Ya tienes una cuenta?{' '}
+          <Link to="/login" className="text-forest-700 hover:underline font-medium">
+            Inicia sesión
+          </Link>
+        </p>
       </div>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default Register
