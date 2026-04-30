@@ -6,7 +6,6 @@ const router = Router();
 
 // POST /api/meetings - crear reunión
 router.post('/', async (req, res) => {
-    console.log('Body recibido:', req.body)
     try {
         const { title, description, date_time, location, coordinates, max_capacity, created_by } = req.body;
 

@@ -10,7 +10,7 @@ import {
 
 const AuthContext = createContext()
 
-// Traduce los códigos de error de Firebase al español
+// Traductor de códigos de error de Firebase al español
 export function translateFirebaseError(code) {
   const errors = {
     'auth/email-already-in-use': 'Este correo ya está registrado.',
@@ -28,9 +28,17 @@ export function translateFirebaseError(code) {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [rol, setRol] = useState(null)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        const response = await fetch(`/api/users/${currentUser.uid}`)
+        const data = await response.json()
+        setRol(data.name_rol)
+      } else {
+        setRol(null)
+      }
       setUser(currentUser)
       setLoading(false)
     })
@@ -45,13 +53,27 @@ export function AuthProvider({ children }) {
     if (displayName) {
       await updateProfile(credential.user, { displayName })
     }
+    const response = await fetch(`/api/users/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id_user: credential.user.uid,
+        name_user: displayName,
+        email_user: credential.user.email
+      }),
+    })
+    if (!response.ok) {
+      throw new Error('Error al crear usuario')
+    }
     return credential
   }
 
   const logout = () => signOut(auth)
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, rol, login, register, logout, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   )
