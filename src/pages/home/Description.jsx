@@ -6,7 +6,7 @@ function Description() {
                     className="hidden md:block">
                 </img> 
             </div>
-            <div className="flex flex-col items-center justify-center w-full md:w-2/3 md:bg-[#A9945F]">
+            <div className="flex flex-col items-center justify-center w-full md:w-2/3 md:bg-gold-600">
                 <h1 className="text-center text-2xl font-bold xl:max-w-1/3 md:max-w-1/2 md:text-amber-50">
                     Encuentra La Compañía Y Conexión Natural Para Sanar
                 </h1>
