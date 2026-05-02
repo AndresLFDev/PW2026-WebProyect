@@ -43,3 +43,23 @@
     }
   }
   
+/* Floating animation for hero cards */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.animate-float {
+  animation: floaty 6s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation: floaty 6s ease-in-out 1s infinite;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}

@@ -2,7 +2,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import PrivateRoute from './components/layout/Privateroute'
-import Home from './pages/Home/Home'
+import Home from "./pages/home/Home";
 import Meetings from './pages/Meetings'
 import Login from './pages/Login'
 import Register from './pages/Register'
